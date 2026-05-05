@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Proposta — Visione Lab</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0F1923;
+    --paper: #F7F4EF;
+    --gold: #C49A4A;
+    --gold-light: #E8D5A8;
+    --muted: #8C8680;
+    --border: #DDD8D0;
+    --white: #FFFFFF;
+    --green: #2E6B52;
+    --green-light: #EAF3EE;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 60px 40px;
+  }
+
+  /* HEADER */
+  .header {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: start;
+    gap: 24px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 56px;
+  }
+
+  .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 38px;
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--ink);
+    max-width: 420px;
+  }
+
+  .header-meta {
+    text-align: right;
+  }
+
+  .header-meta .label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .header-meta .value {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .header-meta .value + .label { margin-top: 16px; }
+
+  .badge {
+    display: inline-block;
+    margin-top: 20px;
+    background: var(--ink);
+    color: var(--paper);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 2px;
+  }
+
+  /* SECTION */
+  .section { margin-bottom: 52px; }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--gold-light);
+  }
+
+  /* MÓDULOS */
+  .modulos { display: flex; flex-direction: column; gap: 2px; }
+
+  .modulo {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    gap: 20px;
+    padding: 20px 24px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+
+  .modulo:first-child { border-radius: 8px 8px 0 0; }
+  .modulo:last-child { border-radius: 0 0 8px 8px; }
+  .modulo:only-child { border-radius: 8px; }
+
+  .modulo:hover {
+    border-color: var(--gold-light);
+    box-shadow: 0 2px 12px rgba(196,154,74,0.08);
+    z-index: 1;
+    position: relative;
+  }
+
+  .mod-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--gold);
+    font-weight: 400;
+    line-height: 1;
+  }
+
+  .mod-info {}
+
+  .mod-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 3px;
+  }
+
+  .mod-sub {
+    font-size: 13px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  .mod-duration {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .mod-duration::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--gold-light);
+    display: inline-block;
+  }
+
+  /* INCLUSO */
+  .incluso-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+  }
+
+  .incluso-item {
+    background: var(--white);
+    border: 1px solid var(--border);
+    padding: 16px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .incluso-item:nth-child(1) { border-radius: 8px 0 0 0; }
+  .incluso-item:nth-child(2) { border-radius: 0 8px 0 0; }
+  .incluso-item:nth-last-child(1):nth-child(odd) { border-radius: 0 0 8px 8px; grid-column: 1/-1; }
+  .incluso-item:nth-last-child(2) { border-radius: 0 0 0 8px; }
+  .incluso-item:nth-last-child(1):nth-child(even) { border-radius: 0 0 8px 0; }
+
+  .incluso-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--gold);
+    flex-shrink: 0;
+    margin-top: 8px;
+  }
+
+  .incluso-text {
+    font-size: 14px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+
+  .incluso-text small {
+    display: block;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  /* IAs */
+  .ia-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .ia-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .ia-card-header {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .ia-card-header.free {
+    background: var(--green-light);
+    border-bottom: 1px solid #C8E0D6;
+  }
+
+  .ia-card-header.paid {
+    background: #F0EBE0;
+    border-bottom: 1px solid var(--gold-light);
+  }
+
+  .ia-tag {
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .ia-tag.free { background: var(--green); color: white; }
+  .ia-tag.paid { background: var(--gold); color: white; }
+
+  .ia-card-header span {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .ia-list { padding: 4px 0; background: var(--white); }
+
+  .ia-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 11px 20px;
+    border-bottom: 1px solid #F2EFE9;
+    gap: 12px;
+  }
+
+  .ia-row:last-child { border-bottom: none; }
+
+  .ia-name { font-size: 14px; color: var(--ink); font-weight: 400; }
+  .ia-use { font-size: 12px; color: var(--muted); }
+  .ia-price {
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .ia-price.free-price { color: var(--green); }
+  .ia-price.paid-price { color: var(--gold); }
+
+  /* PREÇOS */
+  .preco-box {
+    background: var(--ink);
+    border-radius: 8px;
+    padding: 36px 40px;
+    color: var(--paper);
+  }
+
+  .preco-intro {
+    font-size: 13px;
+    color: rgba(247,244,239,0.55);
+    letter-spacing: 0.05em;
+    margin-bottom: 28px;
+  }
+
+  .preco-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: rgba(255,255,255,0.08);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .preco-item {
+    background: rgba(255,255,255,0.04);
+    padding: 24px 28px;
+    position: relative;
+  }
+
+  .preco-item.destaque {
+    background: rgba(196,154,74,0.15);
+    border: 1px solid rgba(196,154,74,0.3);
+    border-radius: 4px;
+  }
+
+  .preco-perfil {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(247,244,239,0.45);
+    margin-bottom: 10px;
+  }
+
+  .preco-valor {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--paper);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .preco-item.destaque .preco-valor { color: var(--gold-light); }
+
+  .preco-desc {
+    font-size: 12px;
+    color: rgba(247,244,239,0.45);
+  }
+
+  .preco-tag {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(196,154,74,0.15);
+    padding: 3px 8px;
+    border-radius: 2px;
+  }
+
+  .preco-obs {
+    font-size: 12px;
+    color: rgba(247,244,239,0.4);
+    line-height: 1.6;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .preco-obs strong {
+    color: rgba(247,244,239,0.65);
+    font-weight: 500;
+  }
+
+  /* TRILHA */
+  .trilha-box {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 28px 32px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .trilha-label {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+
+  .trilha-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+
+  .trilha-desc {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .trilha-valores { text-align: right; }
+
+  .trilha-from {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .trilha-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .trilha-economy {
+    font-size: 12px;
+    color: var(--green);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  /* FOOTER */
+  .footer {
+    margin-top: 60px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+  }
+
+  .footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .footer-sub {
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .footer-validity {
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+  }
+
+  /* PRINT */
+  @media print {
+    body { background: white; }
+    .page { padding: 32px; }
+    .no-print { display: none; }
+  }
+
+  /* Fade in */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .page > * {
+    animation: fadeUp 0.5s ease forwards;
+    opacity: 0;
+  }
+
+  .header { animation-delay: 0s; }
+  .section:nth-child(2) { animation-delay: 0.08s; }
+  .section:nth-child(3) { animation-delay: 0.16s; }
+  .section:nth-child(4) { animation-delay: 0.24s; }
+  .section:nth-child(5) { animation-delay: 0.32s; }
+  .section:nth-child(6) { animation-delay: 0.40s; }
+  .footer { animation-delay: 0.48s; }
+
+  .btn-print {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    padding: 12px 22px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    border-radius: 4px;
+    cursor: pointer;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transition: background 0.2s;
+  }
+
+  .btn-print:hover { background: #2a3a4a; }
+
+  @media (max-width: 600px) {
+    .page { padding: 32px 20px; }
+    .header { grid-template-columns: 1fr; }
+    .header-meta { text-align: left; }
+    .incluso-grid { grid-template-columns: 1fr; }
+    .ia-cols { grid-template-columns: 1fr; }
+    .preco-grid { grid-template-columns: 1fr; }
+    .trilha-box { grid-template-columns: 1fr; }
+    .trilha-valores { text-align: left; }
+    .footer { flex-direction: column; align-items: flex-start; }
+    .footer-validity { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div>
+      <div class="brand">Visione Lab</div>
+      <h1>Treinamento IA para Representantes Comerciais</h1>
+    </div>
+    <div class="header-meta">
+      <div class="label">Formato</div>
+      <div class="value">Presencial</div>
+      <div class="label">Turma</div>
+      <div class="value">8 a 10 pessoas</div>
+      <div class="label">Setor</div>
+      <div class="value">Moda & Vestuário</div>
+      <div class="badge">2025</div>
+    </div>
+  </div>
+
+  <!-- MÓDULOS -->
+  <div class="section">
+    <div class="section-label">Módulos do Programa</div>
+    <div class="modulos">
+      <div class="modulo">
+        <div class="mod-num">01</div>
+        <div class="mod-info">
+          <div class="mod-title">IA para Divulgação e Conteúdo</div>
+          <div class="mod-sub">"Faço minha campanha sozinho"</div>
+        </div>
+        <div class="mod-duration">2h30</div>
+      </div>
+      <div class="modulo">
+        <div class="mod-num">02</div>
+        <div class="mod-info">
+          <div class="mod-title">IA para Prospecção e Vendas</div>
+          <div class="mod-sub">"Encontro clientes novos com IA"</div>
+        </div>
+        <div class="mod-duration">2h30</div>
+      </div>
+      <div class="modulo">
+        <div class="mod-num">03</div>
+        <div class="mod-info">
+          <div class="mod-title">IA para Planejamento e Rotina</div>
+          <div class="mod-sub">"Organizo minha semana com IA"</div>
+        </div>
+        <div class="mod-duration">2h30</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- INCLUSO -->
+  <div class="section">
+    <div class="section-label">Incluso em cada módulo</div>
+    <div class="incluso-grid">
+      <div class="incluso-item">
+        <div class="incluso-dot"></div>
+        <div class="incluso-text">
+          Facilitador + co-facilitador
+          <small>Suporte individual durante toda a prática</small>
+        </div>
+      </div>
+      <div class="incluso-item">
+        <div class="incluso-dot"></div>
+        <div class="incluso-text">
+          Material físico
+          <small>Bloco de anotações personalizado + caneta</small>
+        </div>
+      </div>
+      <div class="incluso-item">
+        <div class="incluso-dot"></div>
+        <div class="incluso-text">
+          Fluxo exclusivo por participante
+          <small>Cowork + prompts configurados para o seu negócio</small>
+        </div>
+      </div>
+      <div class="incluso-item">
+        <div class="incluso-dot"></div>
+        <div class="incluso-text">
+          PDF de apoio digital
+          <small>Material de consulta pós-treinamento</small>
+        </div>
+      </div>
+      <div class="incluso-item">
+        <div class="incluso-dot"></div>
+        <div class="incluso-text">
+          Suporte pós-treinamento
+          <small>7 dias via WhatsApp após cada módulo</small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IAs -->
+  <div class="section">
+    <div class="section-label">Ferramentas de IA utilizadas</div>
+    <div class="ia-cols">
+
+      <div class="ia-card">
+        <div class="ia-card-header free">
+          <span class="ia-tag free">Gratuitas</span>
+          <span>Acesso sem assinatura</span>
+        </div>
+        <div class="ia-list">
+          <div class="ia-row">
+            <div>
+              <div class="ia-name">Claude</div>
+              <div class="ia-use">IA principal do treinamento</div>
+            </div>
+            <div class="ia-price free-price">Gratuito</div>
+          </div>
+          <div class="ia-row">
+            <div>
+              <div class="ia-name">ChatGPT</div>
+              <div class="ia-use">Textos, copy, comparativo</div>
+            </div>
+            <div class="ia-price free-price">Gratuito</div>
+          </div>
+          <div class="ia-row">
+            <div>
+              <div class="ia-name">Nano Banana</div>
+              <div class="ia-use">Geração de imagens</div>
+            </div>
+            <div class="ia-price free-price">Gratuito</div>
+          </div>
+          <div class="ia-row">
+            <div>
+              <div class="ia-name">Google Maps IA</div>
+              <div class="ia-use">Prospecção por cidade</div>
+            </div>
+            <div class="ia-price free-price">Gratuito</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ia-card">
+        <div class="ia-card-header paid">
+          <span class="ia-tag paid">Pagas</span>
+          <span>Opcional — maior capacidade</span>
+        </div>
+        <div class="ia-list">
+          <div class="ia-row">
+            <div>
+              <div class="ia-name">Claude Pro</div>
+              <div class="ia-use">Uso intenso + Cowork</div>
+            </div>
+            <div class="ia-price paid-price">~R$ 125/mês</div>
+          </div>
+          <div class="ia-row">
+            <div>
+              <div class="ia-name">ChatGPT Plus</div>
+              <div class="ia-use">GPT-4o completo</div>
+            </div>
+            <div class="ia-price paid-price">~R$ 110/mês</div>
+          </div>
+          <div class="ia-row">
+            <div>
+              <div class="ia-name">ChatGPT Go</div>
+              <div class="ia-use">Versão intermediária</div>
+            </div>
+            <div class="ia-price paid-price">R$ 39,99/mês</div>
+          </div>
+          <div class="ia-row">
+            <div>
+              <div class="ia-name">Google AI Pro</div>
+              <div class="ia-use">VEO3 + Nano Banana sem limite</div>
+            </div>
+            <div class="ia-price paid-price">~R$ 120/mês</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PREÇOS -->
+  <div class="section">
+    <div class="section-label">Investimento por módulo</div>
+    <div class="preco-box">
+      <div class="preco-intro">Inscrição individual · turma mínima de 8 participantes</div>
+      <div class="preco-grid">
+        <div class="preco-item">
+          <div class="preco-perfil">Afiliado Sinvesco</div>
+          <div class="preco-valor">R$ 250</div>
+          <div class="preco-desc">por módulo · por pessoa</div>
+        </div>
+        <div class="preco-item destaque">
+          <div class="preco-tag">Não afiliado</div>
+          <div class="preco-perfil">Público geral</div>
+          <div class="preco-valor">R$ 400</div>
+          <div class="preco-desc">por módulo · por pessoa</div>
+        </div>
+      </div>
+      <div class="preco-obs">
+        <strong>Pagamento:</strong> antecipado no ato da inscrição via Pix ou cartão &nbsp;·&nbsp;
+        <strong>Cancelamento:</strong> reembolso integral com 5+ dias úteis de antecedência &nbsp;·&nbsp;
+        Turma confirmada ao atingir o mínimo de 8 inscritos
+      </div>
+    </div>
+  </div>
+
+  <!-- TRILHA COMPLETA -->
+  <div class="section">
+    <div class="section-label">Trilha completa</div>
+    <div class="trilha-box">
+      <div>
+        <div class="trilha-label">Os 3 módulos juntos</div>
+        <div class="trilha-title">Programa completo de IA para Representantes</div>
+        <div class="trilha-desc">Contratando os 3 módulos garante vaga nas turmas e desconto exclusivo</div>
+      </div>
+      <div class="trilha-valores">
+        <div class="trilha-from">A partir de</div>
+        <div class="trilha-price">R$ 650</div>
+        <div class="trilha-economy">↓ Economia de R$ 100 (afiliado)</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>
+      <div class="footer-brand">Visione Lab</div>
+      <div class="footer-sub">Inteligência Artificial aplicada aos negócios · Colatina, ES</div>
+    </div>
+    <div class="footer-validity">
+      Proposta válida por 30 dias<br>
+      a partir da data de emissão
+    </div>
+  </div>
+
+</div>
+
+<button class="btn-print no-print" onclick="window.print()">Salvar PDF</button>
+
+</body>
+</html>
