@@ -228,77 +228,34 @@
     margin-top: 2px;
   }
 
-  /* IAs */
-  .ia-cols {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-
-  .ia-card {
+  /* IAs simplificado */
+  .ia-info-box {
+    background: var(--white);
     border: 1px solid var(--border);
     border-radius: 8px;
-    overflow: hidden;
-  }
-
-  .ia-card-header {
-    padding: 14px 20px;
+    padding: 28px 32px;
     display: flex;
-    align-items: center;
-    gap: 10px;
+    align-items: flex-start;
+    gap: 20px;
   }
 
-  .ia-card-header.free {
-    background: var(--green-light);
-    border-bottom: 1px solid #C8E0D6;
+  .ia-info-icon {
+    font-size: 22px;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
-  .ia-card-header.paid {
-    background: #F0EBE0;
-    border-bottom: 1px solid var(--gold-light);
+  .ia-info-text {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.7;
   }
 
-  .ia-tag {
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 2px;
-  }
-
-  .ia-tag.free { background: var(--green); color: white; }
-  .ia-tag.paid { background: var(--gold); color: white; }
-
-  .ia-card-header span {
-    font-size: 13px;
-    font-weight: 500;
+  .ia-info-text strong {
     color: var(--ink);
-  }
-
-  .ia-list { padding: 4px 0; background: var(--white); }
-
-  .ia-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 11px 20px;
-    border-bottom: 1px solid #F2EFE9;
-    gap: 12px;
-  }
-
-  .ia-row:last-child { border-bottom: none; }
-
-  .ia-name { font-size: 14px; color: var(--ink); font-weight: 400; }
-  .ia-use { font-size: 12px; color: var(--muted); }
-  .ia-price {
-    font-size: 13px;
     font-weight: 500;
-    white-space: nowrap;
   }
-
-  .ia-price.free-price { color: var(--green); }
-  .ia-price.paid-price { color: var(--gold); }
 
   /* PREÇOS */
   .preco-box {
@@ -550,7 +507,7 @@
       <div class="value">8 a 10 pessoas</div>
       <div class="label">Setor</div>
       <div class="value">Moda & Vestuário</div>
-      <div class="badge">2025</div>
+      <div class="badge">2026</div>
     </div>
   </div>
 
@@ -564,7 +521,7 @@
           <div class="mod-title">IA para Divulgação e Conteúdo</div>
           <div class="mod-sub">"Faço minha campanha sozinho"</div>
         </div>
-        <div class="mod-duration">2h30</div>
+        <div class="mod-duration">3h</div>
       </div>
       <div class="modulo">
         <div class="mod-num">02</div>
@@ -572,7 +529,7 @@
           <div class="mod-title">IA para Prospecção e Vendas</div>
           <div class="mod-sub">"Encontro clientes novos com IA"</div>
         </div>
-        <div class="mod-duration">2h30</div>
+        <div class="mod-duration">3h</div>
       </div>
       <div class="modulo">
         <div class="mod-num">03</div>
@@ -580,7 +537,7 @@
           <div class="mod-title">IA para Planejamento e Rotina</div>
           <div class="mod-sub">"Organizo minha semana com IA"</div>
         </div>
-        <div class="mod-duration">2h30</div>
+        <div class="mod-duration">3h</div>
       </div>
     </div>
   </div>
@@ -621,7 +578,7 @@
         <div class="incluso-dot"></div>
         <div class="incluso-text">
           Suporte pós-treinamento
-          <small>7 dias via WhatsApp após cada módulo</small>
+          <small>Acompanhamento via WhatsApp por 30 dias após cada módulo</small>
         </div>
       </div>
     </div>
@@ -630,82 +587,11 @@
   <!-- IAs -->
   <div class="section">
     <div class="section-label">Ferramentas de IA utilizadas</div>
-    <div class="ia-cols">
-
-      <div class="ia-card">
-        <div class="ia-card-header free">
-          <span class="ia-tag free">Gratuitas</span>
-          <span>Acesso sem assinatura</span>
-        </div>
-        <div class="ia-list">
-          <div class="ia-row">
-            <div>
-              <div class="ia-name">Claude</div>
-              <div class="ia-use">IA principal do treinamento</div>
-            </div>
-            <div class="ia-price free-price">Gratuito</div>
-          </div>
-          <div class="ia-row">
-            <div>
-              <div class="ia-name">ChatGPT</div>
-              <div class="ia-use">Textos, copy, comparativo</div>
-            </div>
-            <div class="ia-price free-price">Gratuito</div>
-          </div>
-          <div class="ia-row">
-            <div>
-              <div class="ia-name">Nano Banana</div>
-              <div class="ia-use">Geração de imagens</div>
-            </div>
-            <div class="ia-price free-price">Gratuito</div>
-          </div>
-          <div class="ia-row">
-            <div>
-              <div class="ia-name">Google Maps IA</div>
-              <div class="ia-use">Prospecção por cidade</div>
-            </div>
-            <div class="ia-price free-price">Gratuito</div>
-          </div>
-        </div>
+    <div class="ia-info-box">
+      <div class="ia-info-icon">✦</div>
+      <div class="ia-info-text">
+        Todas as ferramentas de inteligência artificial utilizadas no treinamento possuem <strong>versão gratuita</strong> — permitindo que o participante coloque em prática o que aprendeu sem nenhum custo imediato. Para quem deseja expandir o uso, cada ferramenta também oferece <strong>planos pagos</strong> com maior capacidade e recursos avançados.
       </div>
-
-      <div class="ia-card">
-        <div class="ia-card-header paid">
-          <span class="ia-tag paid">Pagas</span>
-          <span>Opcional — maior capacidade</span>
-        </div>
-        <div class="ia-list">
-          <div class="ia-row">
-            <div>
-              <div class="ia-name">Claude Pro</div>
-              <div class="ia-use">Uso intenso + Cowork</div>
-            </div>
-            <div class="ia-price paid-price">~R$ 125/mês</div>
-          </div>
-          <div class="ia-row">
-            <div>
-              <div class="ia-name">ChatGPT Plus</div>
-              <div class="ia-use">GPT-4o completo</div>
-            </div>
-            <div class="ia-price paid-price">~R$ 110/mês</div>
-          </div>
-          <div class="ia-row">
-            <div>
-              <div class="ia-name">ChatGPT Go</div>
-              <div class="ia-use">Versão intermediária</div>
-            </div>
-            <div class="ia-price paid-price">R$ 39,99/mês</div>
-          </div>
-          <div class="ia-row">
-            <div>
-              <div class="ia-name">Google AI Pro</div>
-              <div class="ia-use">VEO3 + Nano Banana sem limite</div>
-            </div>
-            <div class="ia-price paid-price">~R$ 120/mês</div>
-          </div>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -737,7 +623,7 @@
 
   <!-- TRILHA COMPLETA -->
   <div class="section">
-    <div class="section-label">Trilha completa</div>
+    <div class="section-label">Trilha completa — 3 módulos</div>
     <div class="trilha-box">
       <div>
         <div class="trilha-label">Os 3 módulos juntos</div>
@@ -745,9 +631,18 @@
         <div class="trilha-desc">Contratando os 3 módulos garante vaga nas turmas e desconto exclusivo</div>
       </div>
       <div class="trilha-valores">
-        <div class="trilha-from">A partir de</div>
-        <div class="trilha-price">R$ 650</div>
-        <div class="trilha-economy">↓ Economia de R$ 100 (afiliado)</div>
+        <div style="display:flex;gap:28px;align-items:flex-start;justify-content:flex-end;">
+          <div style="text-align:right;">
+            <div class="trilha-from">Afiliado Sinvesco</div>
+            <div class="trilha-price">R$ 650</div>
+            <div class="trilha-economy">↓ Economia de R$ 100</div>
+          </div>
+          <div style="text-align:right;">
+            <div class="trilha-from">Não afiliado</div>
+            <div class="trilha-price" style="color:var(--ink);">R$ 1.000</div>
+            <div class="trilha-economy">↓ Economia de R$ 200</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
