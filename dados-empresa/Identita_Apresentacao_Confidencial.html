@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Identita — Apresentação Confidencial 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy: #0b2d4e;
+  --navy2: #0f3d6b;
+  --gold: #c9a84c;
+  --gold2: #e8c96c;
+  --cream: #faf8f3;
+  --dark: #0a1628;
+  --text: #1c2b3a;
+  --muted: #7a8fa0;
+  --light-bg: #f0f4f8;
+  --white: #ffffff;
+  --accent: #d4764a;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--dark);
+  color: var(--white);
+  overflow-x: hidden;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(10,22,40,0.85);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(201,168,76,0.15);
+}
+.nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: var(--white); }
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 32px; }
+.nav-links a { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.5); text-decoration: none; transition: color .25s; font-weight: 500; }
+.nav-links a:hover { color: var(--gold); }
+.nav-badge { font-size: 10px; padding: 5px 14px; border: 1px solid rgba(201,168,76,0.4); border-radius: 20px; color: var(--gold); letter-spacing: 1.5px; text-transform: uppercase; font-weight: 600; }
+
+/* SECTIONS */
+section { min-height: 100vh; position: relative; overflow: hidden; }
+
+/* ============ HERO ============ */
+#hero {
+  background: var(--dark);
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 120px 80px 80px;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 70% 40%, rgba(15,61,107,0.5) 0%, transparent 70%),
+              radial-gradient(ellipse 40% 40% at 20% 80%, rgba(201,168,76,0.08) 0%, transparent 60%);
+}
+.hero-grid-line {
+  position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(201,168,76,0.04) 1px, transparent 1px),
+                    linear-gradient(90deg, rgba(201,168,76,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+}
+.hero-content { position: relative; z-index: 1; max-width: 700px; }
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+}
+.hero-eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
+.hero-eyebrow span { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); font-weight: 500; }
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(64px, 8vw, 100px);
+  font-weight: 300;
+  line-height: 0.95;
+  margin-bottom: 24px;
+  letter-spacing: -1px;
+}
+.hero-title .line1 { display: block; color: rgba(255,255,255,0.9); }
+.hero-title .line2 { display: block; color: var(--gold); font-style: italic; }
+.hero-subtitle {
+  font-size: 15px; line-height: 1.7; color: rgba(255,255,255,0.55);
+  max-width: 520px; margin-bottom: 48px; font-weight: 300;
+}
+.hero-stats {
+  display: flex; gap: 0; margin-bottom: 48px;
+  border: 1px solid rgba(201,168,76,0.2); border-radius: 2px;
+  overflow: hidden; width: fit-content;
+}
+.hero-stat {
+  padding: 20px 32px;
+  border-right: 1px solid rgba(201,168,76,0.2);
+  background: rgba(255,255,255,0.02);
+}
+.hero-stat:last-child { border-right: none; }
+.hero-stat-val {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 600; color: var(--white); line-height: 1;
+  margin-bottom: 4px;
+}
+.hero-stat-val span { color: var(--gold); }
+.hero-stat-lbl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: rgba(255,255,255,0.4); font-weight: 500; }
+.hero-cta {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600;
+  color: var(--navy); background: var(--gold);
+  padding: 16px 32px; border-radius: 1px; text-decoration: none;
+  transition: all .3s;
+}
+.hero-cta:hover { background: var(--gold2); transform: translateY(-2px); }
+.hero-deco-circle {
+  position: absolute; right: -80px; top: 50%; transform: translateY(-50%);
+  width: 600px; height: 600px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.08);
+}
+.hero-deco-circle2 {
+  position: absolute; right: 40px; top: 50%; transform: translateY(-50%);
+  width: 400px; height: 400px; border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.05);
+}
+
+/* ============ ABOUT / EMPRESA ============ */
+#empresa {
+  background: var(--cream);
+  color: var(--text);
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+.section-eyebrow {
+  font-size: 10px; letter-spacing: 4px; text-transform: uppercase; font-weight: 600;
+  color: var(--gold); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+.section-eyebrow::before { content: ''; display: block; width: 30px; height: 1px; background: var(--gold); }
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 600; line-height: 1.1;
+  color: var(--navy); margin-bottom: 56px;
+  letter-spacing: -0.5px;
+}
+.about-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: rgba(0,0,0,0.08); border: 1px solid rgba(0,0,0,0.08); }
+.about-cell {
+  background: white; padding: 36px 32px;
+  transition: background .25s;
+}
+.about-cell:hover { background: #f9f6ef; }
+.about-cell-icon { font-size: 28px; margin-bottom: 16px; }
+.about-cell-title { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; color: var(--navy); margin-bottom: 12px; }
+.about-cell-val { font-family: 'Cormorant Garamond', serif; font-size: 36px; font-weight: 700; color: var(--navy); line-height: 1; margin-bottom: 6px; }
+.about-cell-val span { color: var(--gold); }
+.about-cell-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+.about-meta { margin-top: 48px; display: flex; gap: 48px; flex-wrap: wrap; }
+.about-meta-item { }
+.about-meta-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); font-weight: 500; margin-bottom: 4px; }
+.about-meta-val { font-size: 14px; color: var(--navy); font-weight: 500; }
+
+/* ============ PRODUTOS ============ */
+#produtos {
+  background: var(--navy);
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+#produtos .section-title { color: var(--white); }
+.produtos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: rgba(255,255,255,0.06); }
+.produto-card {
+  background: rgba(255,255,255,0.03); padding: 40px 36px;
+  border-top: 2px solid transparent;
+  transition: all .3s; cursor: default;
+  position: relative; overflow: hidden;
+}
+.produto-card::before {
+  content: ''; position: absolute; inset: 0;
+  background: rgba(201,168,76,0.05); opacity: 0; transition: opacity .3s;
+}
+.produto-card:hover { border-top-color: var(--gold); background: rgba(255,255,255,0.06); }
+.produto-card:hover::before { opacity: 1; }
+.produto-num { font-family: 'Cormorant Garamond', serif; font-size: 64px; font-weight: 300; color: rgba(201,168,76,0.15); line-height: 1; margin-bottom: 20px; display: block; }
+.produto-name { font-size: 16px; font-weight: 600; color: var(--white); margin-bottom: 12px; letter-spacing: -0.3px; }
+.produto-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; margin-bottom: 20px; }
+.produto-tag { display: inline-block; font-size: 9px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(201,168,76,0.3); padding: 4px 10px; }
+
+/* ============ FINANCEIRO ============ */
+#financeiro {
+  background: var(--dark);
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+#financeiro .section-title { color: var(--white); }
+.fin-layout { display: grid; grid-template-columns: 1fr 360px; gap: 48px; align-items: start; }
+.fin-table-wrap { }
+.fin-headline { font-family: 'Cormorant Garamond', serif; font-size: 48px; font-weight: 300; color: var(--white); margin-bottom: 8px; }
+.fin-headline b { color: var(--gold); font-weight: 700; }
+.fin-sub { font-size: 13px; color: rgba(255,255,255,0.4); margin-bottom: 36px; }
+table.fin-table { width: 100%; border-collapse: collapse; }
+.fin-table thead tr { border-bottom: 1px solid rgba(201,168,76,0.3); }
+.fin-table thead th { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); padding: 0 0 12px; text-align: left; font-weight: 500; }
+.fin-table thead th:not(:first-child) { text-align: right; }
+.fin-table tbody tr { border-bottom: 1px solid rgba(255,255,255,0.05); transition: background .2s; }
+.fin-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+.fin-table tbody td { padding: 10px 0; font-size: 13px; color: rgba(255,255,255,0.7); }
+.fin-table tbody td:not(:first-child) { text-align: right; }
+.fin-table .peak td { color: var(--white) !important; font-weight: 600; }
+.fin-table .peak td:last-child { color: var(--gold) !important; }
+.fin-table tfoot tr { border-top: 1px solid rgba(201,168,76,0.4); }
+.fin-table tfoot td { padding: 14px 0 0; font-size: 13px; font-weight: 600; color: var(--white); }
+.fin-table tfoot td:not(:first-child) { text-align: right; color: var(--gold); }
+.bar-inline { display: inline-block; height: 3px; background: rgba(201,168,76,0.3); border-radius: 2px; vertical-align: middle; margin-left: 8px; }
+.bar-inline-fill { display: inline-block; height: 3px; background: var(--gold); border-radius: 2px; }
+.fin-cards { display: flex; flex-direction: column; gap: 16px; }
+.fin-card {
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(201,168,76,0.15);
+  padding: 28px 24px; border-radius: 2px;
+}
+.fin-card-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 10px; font-weight: 500; }
+.fin-card-val { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 600; color: var(--white); line-height: 1; margin-bottom: 4px; }
+.fin-card-val span { color: var(--gold); }
+.fin-card-sub { font-size: 12px; color: rgba(255,255,255,0.35); }
+.fin-card.gold-card { background: var(--gold); border-color: var(--gold); }
+.fin-card.gold-card .fin-card-label { color: rgba(10,22,40,0.6); }
+.fin-card.gold-card .fin-card-val { color: var(--navy); }
+.fin-card.gold-card .fin-card-sub { color: rgba(10,22,40,0.55); }
+
+/* ============ CLIENTES ============ */
+#clientes {
+  background: var(--cream);
+  color: var(--text);
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+#clientes .section-title { color: var(--navy); }
+.clientes-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.clientes-left { }
+.clientes-right { display: flex; flex-direction: column; gap: 20px; }
+.cli-list { }
+.cli-item {
+  display: flex; align-items: center; gap: 16px;
+  padding: 16px 0; border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.cli-item:first-child { border-top: 1px solid rgba(0,0,0,0.07); }
+.cli-num { font-family: 'Cormorant Garamond', serif; font-size: 14px; color: var(--gold); font-weight: 600; width: 24px; }
+.cli-name { font-size: 14px; color: var(--navy); font-weight: 500; flex: 1; }
+.cli-tag { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); background: var(--light-bg); padding: 3px 8px; }
+.cli-freq { font-size: 12px; color: var(--gold); font-weight: 600; }
+.info-block {
+  background: var(--navy);
+  padding: 32px 28px; color: white;
+}
+.info-block-title { font-size: 11px; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; font-weight: 500; }
+.info-block ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.info-block li { font-size: 13px; color: rgba(255,255,255,0.7); line-height: 1.5; display: flex; gap: 10px; }
+.info-block li::before { content: '→'; color: var(--gold); flex-shrink: 0; font-weight: 600; }
+.stat-row { display: flex; gap: 1px; background: rgba(0,0,0,0.08); }
+.stat-block { flex: 1; background: white; padding: 24px 20px; }
+.stat-block-val { font-family: 'Cormorant Garamond', serif; font-size: 40px; font-weight: 700; color: var(--navy); line-height: 1; }
+.stat-block-val span { color: var(--gold); }
+.stat-block-lbl { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-top: 6px; font-weight: 500; }
+
+/* ============ DIFERENCIAIS ============ */
+#diferenciais {
+  background: var(--navy2);
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+#diferenciais .section-title { color: var(--white); }
+.dif-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.dif-card {
+  padding: 36px 28px;
+  border: 1px solid rgba(201,168,76,0.12);
+  background: rgba(255,255,255,0.025);
+  transition: border-color .3s, background .3s;
+}
+.dif-card:hover { border-color: rgba(201,168,76,0.4); background: rgba(255,255,255,0.05); }
+.dif-icon { font-size: 32px; margin-bottom: 20px; }
+.dif-title { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 14px; letter-spacing: -0.2px; }
+.dif-body { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.7; }
+
+/* ============ OPORTUNIDADE ============ */
+#oportunidade {
+  background: var(--dark);
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+}
+#oportunidade .section-title { color: var(--white); }
+.oport-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
+.oport-block { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07); padding: 36px 32px; }
+.oport-block-title { font-size: 11px; letter-spacing: 3px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; font-weight: 500; }
+.oport-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.oport-list li { font-size: 13.5px; color: rgba(255,255,255,0.65); line-height: 1.6; display: flex; gap: 14px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.oport-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.oport-list li::before { content: '✦'; color: var(--gold); font-size: 8px; margin-top: 5px; flex-shrink: 0; }
+
+/* ============ CLOSING ============ */
+#closing {
+  background: var(--navy);
+  padding: 100px 80px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.closing-bg {
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(201,168,76,0.06) 0%, transparent 70%);
+}
+.closing-content { position: relative; z-index: 1; }
+.closing-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(40px, 5vw, 72px);
+  font-weight: 300; color: var(--white); line-height: 1.1; margin-bottom: 24px;
+}
+.closing-title em { color: var(--gold); font-style: italic; }
+.closing-sub { font-size: 15px; color: rgba(255,255,255,0.5); max-width: 520px; line-height: 1.7; margin-bottom: 56px; font-weight: 300; }
+.contact-grid { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 64px; }
+.contact-card { border: 1px solid rgba(201,168,76,0.25); padding: 20px 24px; min-width: 160px; background: rgba(255,255,255,0.02); }
+.contact-label { font-size: 9px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; font-weight: 500; }
+.contact-val { font-size: 14px; color: var(--white); font-weight: 500; }
+.closing-confidential {
+  font-size: 10px; color: rgba(255,255,255,0.2); letter-spacing: 1.5px;
+  text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.07);
+  padding-top: 24px; line-height: 1.6;
+}
+
+/* ANIMATIONS */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+.hero-content > * { animation: fadeUp 0.8s ease forwards; opacity: 0; }
+.hero-eyebrow { animation-delay: 0.1s; }
+.hero-title { animation-delay: 0.25s; }
+.hero-subtitle { animation-delay: 0.4s; }
+.hero-stats { animation-delay: 0.55s; }
+.hero-cta { animation-delay: 0.7s; }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--dark); }
+::-webkit-scrollbar-thumb { background: rgba(201,168,76,0.4); }
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  nav { padding: 14px 24px; }
+  .nav-links { display: none; }
+  section, #empresa, #produtos, #financeiro, #clientes, #diferenciais, #oportunidade, #closing { padding: 80px 28px; }
+  .hero-stats { flex-direction: column; width: auto; }
+  .hero-stat { border-right: none; border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .about-grid { grid-template-columns: 1fr; }
+  .produtos-grid { grid-template-columns: 1fr; }
+  .fin-layout { grid-template-columns: 1fr; }
+  .clientes-layout { grid-template-columns: 1fr; }
+  .dif-grid { grid-template-columns: 1fr; }
+  .oport-layout { grid-template-columns: 1fr; }
+  .stat-row { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">IDENTIT<span>A</span></div>
+  <div class="nav-links">
+    <a href="#empresa">Empresa</a>
+    <a href="#produtos">Produtos</a>
+    <a href="#financeiro">Financeiro</a>
+    <a href="#clientes">Clientes</a>
+    <a href="#diferenciais">Diferenciais</a>
+    <a href="#oportunidade">Oportunidade</a>
+  </div>
+  <div class="nav-badge">Confidencial · NDA</div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid-line"></div>
+  <div class="hero-deco-circle"></div>
+  <div class="hero-deco-circle2"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="hero-eyebrow-line"></span>
+      <span>Apresentação Confidencial · 2025</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="line1">Identita</span>
+      <span class="line2">Etiquetas.</span>
+    </h1>
+    <p class="hero-subtitle">Fábrica especializada em soluções de identificação e branding físico para a indústria da moda. Operação estruturada, carteira ativa e faturamento comprovado em 4 anos de mercado.</p>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-val">R$ <span>956k</span></div>
+        <div class="hero-stat-lbl">Faturamento 2025</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val"><span>26</span></div>
+        <div class="hero-stat-lbl">Clientes ativos / mês</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val"><span>4</span> anos</div>
+        <div class="hero-stat-lbl">De operação ativa</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-val"><span>4</span></div>
+        <div class="hero-stat-lbl">Linhas de produto</div>
+      </div>
+    </div>
+    <a href="#empresa" class="hero-cta">Conhecer a empresa ↓</a>
+  </div>
+</section>
+
+<!-- EMPRESA -->
+<section id="empresa">
+  <div class="section-eyebrow">Visão Geral</div>
+  <h2 class="section-title">A empresa,<br>em números.</h2>
+  <div class="about-grid">
+    <div class="about-cell">
+      <div class="about-cell-icon">🏭</div>
+      <div class="about-cell-title">Fundação</div>
+      <div class="about-cell-val"><span>2021</span></div>
+      <div class="about-cell-desc">4 anos de operação contínua, CNPJ ativo, estrutura legal consolidada como Microempresa (ME).</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-icon">💰</div>
+      <div class="about-cell-title">Faturamento 2025</div>
+      <div class="about-cell-val">R$ <span>1,7M</span></div>
+      <div class="about-cell-desc">Faturamento comprovado apenas da linha sintético — soma total da operação ainda maior.</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-icon">📍</div>
+      <div class="about-cell-title">Localização</div>
+      <div class="about-cell-val"><span>ES</span></div>
+      <div class="about-cell-desc">Colatina/ES. Polo estratégico de distribuição para Sudeste — ES, MG, RJ e atendimento nacional.</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-icon">📱</div>
+      <div class="about-cell-title">Seguidores Instagram</div>
+      <div class="about-cell-val"><span>4.328</span></div>
+      <div class="about-cell-desc">@identitaetiquetas — vitrine ativa com geração orgânica de leads B2B.</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-icon">🤝</div>
+      <div class="about-cell-title">Sócios</div>
+      <div class="about-cell-val"><span>2</span></div>
+      <div class="about-cell-desc">Marcio Jose Canisqui (Comercial) e Clayton França dos Santos. Capital social R$ 50.000.</div>
+    </div>
+    <div class="about-cell">
+      <div class="about-cell-icon">🎯</div>
+      <div class="about-cell-title">Mercado Atendido</div>
+      <div class="about-cell-val"><span>B2B</span></div>
+      <div class="about-cell-desc">Confecções, marcas autorais, moda fitness, infantil e uniformes. Atendimento consultivo.</div>
+    </div>
+  </div>
+  <div class="about-meta">
+    <div class="about-meta-item">
+      <div class="about-meta-label">Razão Social</div>
+      <div class="about-meta-val">Identita Manufatura em Couros Sintéticos e Similares Ltda.</div>
+    </div>
+    <div class="about-meta-item">
+      <div class="about-meta-label">CNPJ</div>
+      <div class="about-meta-val">41.070.306/0001-00</div>
+    </div>
+    <div class="about-meta-item">
+      <div class="about-meta-label">Website</div>
+      <div class="about-meta-val">identitaetiquetas.com.br</div>
+    </div>
+    <div class="about-meta-item">
+      <div class="about-meta-label">Contato</div>
+      <div class="about-meta-val">(27) 99932-0514</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section id="produtos">
+  <div class="section-eyebrow">Portfólio</div>
+  <h2 class="section-title">Linha completa.<br>Uma única solução.</h2>
+  <div class="produtos-grid">
+    <div class="produto-card">
+      <span class="produto-num">01</span>
+      <div class="produto-name">Etiqueta Sintética</div>
+      <div class="produto-desc">Tecido sintético com impressão da identidade visual da marca. Padrão da indústria, alta durabilidade e custo acessível para produção em volume.</div>
+      <span class="produto-tag">Alto volume</span>
+    </div>
+    <div class="produto-card">
+      <span class="produto-num">02</span>
+      <div class="produto-name">Termocolante</div>
+      <div class="produto-desc">Aplicação a ferro, sem costura. Muito utilizado em moda fitness, infantil e uniformes — alta praticidade na linha de produção.</div>
+      <span class="produto-tag">Fitness · Infantil</span>
+    </div>
+    <div class="produto-card">
+      <span class="produto-num">03</span>
+      <div class="produto-name">Plaquinha Acrílico</div>
+      <div class="produto-desc">Tag decorativa em acrílico com visual premium. Eleva a percepção de valor do produto e comunica posicionamento de marca ao consumidor final.</div>
+      <span class="produto-tag">Decorativo</span>
+    </div>
+    <div class="produto-card">
+      <span class="produto-num">04</span>
+      <div class="produto-name">Transferflex &amp; Estamparia</div>
+      <div class="produto-desc">Alta resolução e fidelidade de cores. Tecnologia para estampas detalhadas com acabamento profissional em tecidos de qualquer composição.</div>
+      <span class="produto-tag">Alta definição</span>
+    </div>
+  </div>
+</section>
+
+<!-- FINANCEIRO -->
+<section id="financeiro">
+  <div class="section-eyebrow">Desempenho Financeiro</div>
+  <h2 class="section-title">Números que<br>sustentam a tese.</h2>
+  <div class="fin-layout">
+    <div class="fin-table-wrap">
+      <div class="fin-headline">R$ <b>956.536</b></div>
+      <div class="fin-sub">Faturamento 2025 · Linha Sintético · 12 meses auditáveis</div>
+      <table class="fin-table">
+        <thead>
+          <tr>
+            <th>Mês</th>
+            <th>Clientes</th>
+            <th>Faturamento</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Janeiro</td><td>25</td><td>R$ 109.436</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:50%"></span></span></td></tr>
+          <tr><td>Fevereiro</td><td>20</td><td>R$ 76.577</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:35%"></span></span></td></tr>
+          <tr><td>Março</td><td>28</td><td>R$ 21.931</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:10%"></span></span></td></tr>
+          <tr><td>Abril</td><td>24</td><td>R$ 70.242</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:32%"></span></span></td></tr>
+          <tr><td>Maio</td><td>33</td><td>R$ 74.407</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:34%"></span></span></td></tr>
+          <tr><td>Junho</td><td>28</td><td>R$ 60.859</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:28%"></span></span></td></tr>
+          <tr class="peak"><td>Julho ★</td><td>22</td><td>R$ 89.241</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:100%"></span></span></td></tr>
+          <tr><td>Agosto</td><td>25</td><td>R$ 114.298</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:78%"></span></span></td></tr>
+          <tr><td>Setembro</td><td>30</td><td>R$ 107.192</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:73%"></span></span></td></tr>
+          <tr><td>Outubro</td><td>34</td><td>R$ 117.886</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:80%"></span></span></td></tr>
+          <tr><td>Novembro</td><td>27</td><td>R$ 75.407</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:34%"></span></span></td></tr>
+          <tr><td>Dezembro</td><td>18</td><td>R$ 39.060</td><td><span class="bar-inline" style="width:80px"><span class="bar-inline-fill" style="width:18%"></span></span></td></tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Média / Mês</td>
+            <td>26,2</td>
+            <td>R$ 79.711</td>
+            <td></td>
+          </tr>
+        </tfoot>
+      </table>
+    </div>
+    <div class="fin-cards">
+      <div class="fin-card gold-card">
+        <div class="fin-card-label">Total Anual 2025</div>
+        <div class="fin-card-val">R$ <span>956k</span></div>
+        <div class="fin-card-sub">Sintético · base auditável</div>
+      </div>
+      <div class="fin-card">
+        <div class="fin-card-label">Média Mensal 2025</div>
+        <div class="fin-card-val">R$ <span>79k</span></div>
+        <div class="fin-card-sub">Receita / mês sintético</div>
+      </div>
+      <div class="fin-card">
+        <div class="fin-card-label">Pico de Faturamento</div>
+        <div class="fin-card-val">R$ <span>117k</span></div>
+        <div class="fin-card-sub">Outubro 2025</div>
+      </div>
+      <div class="fin-card">
+        <div class="fin-card-label">2026 YTD (Jan–Abr)</div>
+        <div class="fin-card-val">R$ <span>158k</span></div>
+        <div class="fin-card-sub">Média R$ 39k/mês</div>
+      </div>
+      <div class="fin-card">
+        <div class="fin-card-label">Clientes únicos 2025</div>
+        <div class="fin-card-val"><span>314</span></div>
+        <div class="fin-card-sub">Registros de pedido no ano</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENTES -->
+<section id="clientes">
+  <div class="section-eyebrow">Carteira</div>
+  <h2 class="section-title">Quem confia<br>na Identita.</h2>
+  <div class="clientes-layout">
+    <div class="clientes-left">
+      <div class="stat-row" style="margin-bottom:24px">
+        <div class="stat-block">
+          <div class="stat-block-val"><span>26,2</span></div>
+          <div class="stat-block-lbl">Clientes únicos/mês (2025)</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-block-val"><span>34</span></div>
+          <div class="stat-block-lbl">Pico — outubro 2025</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-block-val">2–<span>4x</span></div>
+          <div class="stat-block-lbl">Recompra / ano / cliente</div>
+        </div>
+      </div>
+      <div class="cli-list">
+        <div class="cli-item">
+          <span class="cli-num">01</span>
+          <span class="cli-name">Polo Wear</span>
+          <span class="cli-tag">Alto volume</span>
+          <span class="cli-freq">Recorrente</span>
+        </div>
+        <div class="cli-item">
+          <span class="cli-num">02</span>
+          <span class="cli-name">Pimpolho</span>
+          <span class="cli-tag">Infantil</span>
+          <span class="cli-freq">Recorrente</span>
+        </div>
+        <div class="cli-item">
+          <span class="cli-num">03</span>
+          <span class="cli-name">Ilicito</span>
+          <span class="cli-tag">Moda</span>
+          <span class="cli-freq">Alta freq.</span>
+        </div>
+        <div class="cli-item">
+          <span class="cli-num">04</span>
+          <span class="cli-name">On Six / On Six MR</span>
+          <span class="cli-tag">Premium</span>
+          <span class="cli-freq">Recorrente</span>
+        </div>
+        <div class="cli-item">
+          <span class="cli-num">05</span>
+          <span class="cli-name">Sinttonia</span>
+          <span class="cli-tag">Autoral</span>
+          <span class="cli-freq">Recorrente</span>
+        </div>
+        <div class="cli-item">
+          <span class="cli-num">06</span>
+          <span class="cli-name">Traço</span>
+          <span class="cli-tag">Autoral</span>
+          <span class="cli-freq">Recorrente</span>
+        </div>
+        <div class="cli-item">
+          <span class="cli-num">07</span>
+          <span class="cli-name">Pollice / Pollice Office</span>
+          <span class="cli-tag">Confecção</span>
+          <span class="cli-freq">Recorrente</span>
+        </div>
+        <div class="cli-item">
+          <span class="cli-num">08</span>
+          <span class="cli-name">Too Basic</span>
+          <span class="cli-tag">Autoral</span>
+          <span class="cli-freq">Recorrente</span>
+        </div>
+      </div>
+    </div>
+    <div class="clientes-right">
+      <div class="info-block">
+        <div class="info-block-title">Perfil da Carteira</div>
+        <ul>
+          <li>Mix saudável entre clientes de alto volume e marcas menores — sem concentração de risco em um único cliente</li>
+          <li>Clientes de moda compram por coleção (2–4x/ano) — pipeline de recompra previsível</li>
+          <li>Presença em ES, MG, RJ e atendimento nacional via B2B digital</li>
+          <li>Baixa taxa de churn: quem aprova qualidade e prazo volta na próxima coleção</li>
+        </ul>
+      </div>
+      <div class="info-block" style="background:#f4f7fb; color:var(--text);">
+        <div class="info-block-title" style="color:var(--navy)">Oportunidade de Reativação</div>
+        <ul>
+          <li style="color:var(--text)">Carteira com histórico de clientes inativos que não recompraram — pipeline imediato sem custo de aquisição</li>
+          <li style="color:var(--text)">Ativação antes do lançamento de cada coleção: janela previsível para abordagem proativa</li>
+          <li style="color:var(--text)">Up-sell natural: quem compra sintético pode adicionar termocolante, acrílico e transferflex no mesmo pedido</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAIS -->
+<section id="diferenciais">
+  <div class="section-eyebrow">Por que a Identita</div>
+  <h2 class="section-title">O que nos diferencia<br>de uma gráfica comum.</h2>
+  <div class="dif-grid">
+    <div class="dif-card">
+      <div class="dif-icon">🎯</div>
+      <div class="dif-title">Atendimento Consultivo</div>
+      <div class="dif-body">Orientamos o cliente na escolha do produto ideal para cada projeto. Isso cria vínculo, reduz retrabalho e diferencia a Identita de fornecedores que apenas recebem pedido.</div>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">📦</div>
+      <div class="dif-title">Portfólio Completo</div>
+      <div class="dif-body">4 linhas de produto em um único fornecedor. O cliente não precisa dividir pedido entre múltiplas fábricas — simplifica a cadeia de compras e aumenta o ticket médio.</div>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">⚡</div>
+      <div class="dif-title">Agilidade Operacional</div>
+      <div class="dif-body">Resposta a leads qualificados em até 2 horas. Orçamentos personalizados por projeto. Interface direta entre comercial e produção — sem intermediários ou burocracia.</div>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">🖼️</div>
+      <div class="dif-title">Visualização de Produto</div>
+      <div class="dif-body">Apresentamos mockups digitais da etiqueta no produto antes da produção. Ferramenta que reduz aprovações e aumenta taxa de conversão — diferencial único no setor.</div>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">📊</div>
+      <div class="dif-title">Processos Estruturados</div>
+      <div class="dif-body">CRM ativo, cronograma de pedidos por mês, pipeline de vendas com métricas de conversão. A gestão é profissional e os dados estão organizados para due diligence.</div>
+    </div>
+    <div class="dif-card">
+      <div class="dif-icon">📍</div>
+      <div class="dif-title">Posicionamento de Marca</div>
+      <div class="dif-body">4.300+ seguidores orgânicos no Instagram. Presença em feiras do setor (Denim City, ES Fashion). Marca reconhecida no mercado de moda do Espírito Santo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- OPORTUNIDADE -->
+<section id="oportunidade">
+  <div class="section-eyebrow">Aquisição</div>
+  <h2 class="section-title">O que está<br>sendo adquirido.</h2>
+  <div class="oport-layout">
+    <div>
+      <div class="oport-block" style="margin-bottom:24px">
+        <div class="oport-block-title">O que você leva</div>
+        <ul class="oport-list">
+          <li>Empresa com 4 anos de operação, CNPJ ativo e estrutura legal consolidada</li>
+          <li>Faturamento de R$ 956k em 2025 com histórico auditável mês a mês</li>
+          <li>Carteira de clientes ativa com histórico comprovado de pedidos recorrentes</li>
+          <li>Marca estabelecida no mercado — Instagram, feiras, reputação construída</li>
+          <li>Processos comerciais estruturados: CRM, pipeline, cronograma de produção</li>
+          <li>Portfólio completo de 6 linhas — nenhuma lacuna de produto a suprir</li>
+        </ul>
+      </div>
+      <div class="oport-block">
+        <div class="oport-block-title">Perfil ideal do comprador</div>
+        <ul class="oport-list">
+          <li>Gestor ou investidor com experiência no setor têxtil, confecção ou moda</li>
+          <li>Empresa buscando vertical de etiquetas / acabamentos para integrar à operação</li>
+          <li>Empreendedor interessado em negócio já estruturado com carteira ativa</li>
+          <li>Grupo com presença em outros estados buscando expansão no ES / Sudeste</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div class="oport-block" style="margin-bottom:24px">
+        <div class="oport-block-title">Alavancas de crescimento</div>
+        <ul class="oport-list">
+          <li>Ativação de carteira inativa — clientes com histórico que não recompraram recentemente</li>
+          <li>Expansão para novos estados com a estrutura comercial atual</li>
+          <li>Ampliação do ticket médio via up-sell (sintético + termocolante + acrílico no mesmo pedido)</li>
+          <li>Escala de produção: margem cresce com volume sem custo proporcional</li>
+          <li>Parcerias com plataformas B2B de moda para captação digital nacional</li>
+        </ul>
+      </div>
+      <div class="oport-block">
+        <div class="oport-block-title">Próximos passos</div>
+        <ul class="oport-list">
+          <li>NDA já em vigor — acesso a dados detalhados disponível imediatamente</li>
+          <li>Apresentação da operação, visita à fábrica e reunião com os sócios</li>
+          <li>Disponibilização de DRE, fluxo de caixa e carteira de clientes completa</li>
+          <li>Negociação flexível: 100% aquisição ou entrada como sócio estratégico</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section id="closing">
+  <div class="closing-bg"></div>
+  <div class="closing-content">
+    <div class="section-eyebrow" style="color:var(--gold)">Vamos conversar</div>
+    <div class="closing-title">
+      Cada etiqueta é uma<br><em>assinatura da marca.</em>
+    </div>
+    <p class="closing-sub">A Identita carrega essa responsabilidade com seriedade há 4 anos. Conheça a operação, os números e a equipe que construíram esse resultado. Estamos disponíveis para reunião presencial ou remota.</p>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <div class="contact-label">Responsável</div>
+        <div class="contact-val">Marcio Jose Canisqui</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">WhatsApp</div>
+        <div class="contact-val">(27) 99932-0514</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">Instagram</div>
+        <div class="contact-val">@identitaetiquetas</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">Website</div>
+        <div class="contact-val">identitaetiquetas.com.br</div>
+      </div>
+      <div class="contact-card">
+        <div class="contact-label">Localização</div>
+        <div class="contact-val">Colatina · ES · Brasil</div>
+      </div>
+    </div>
+    <div class="closing-confidential">
+      CONFIDENCIAL — Este documento é de uso exclusivo do destinatário designado e está sujeito ao Acordo de Confidencialidade (NDA) em vigor.<br>
+      Identita Manufatura em Couros Sintéticos e Similares Ltda. · CNPJ 41.070.306/0001-00 · Colatina/ES
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
