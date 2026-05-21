@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arrendamento Comercial — Identita</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root { --dark: #1a1a2e; --gold: #c9a84c; --gray: #888; --light: #f7f7f3; --text: #2a2a2a; }
+  body { font-family: 'Inter', sans-serif; background: #f0ede8; color: var(--text); }
+  header { background: var(--dark); padding: 56px 0 44px; text-align: center; position: relative; overflow: hidden; }
+  header::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  header::before { content: 'IDENTITA'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Playfair Display', serif; font-size: 160px; font-weight: 700; color: rgba(255,255,255,0.03); white-space: nowrap; pointer-events: none; letter-spacing: 0.2em; }
+  .badge { display: inline-block; background: rgba(201,168,76,0.15); border: 1px solid rgba(201,168,76,0.3); color: var(--gold); font-size: 10px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; padding: 5px 16px; border-radius: 20px; margin-bottom: 20px; }
+  header h1 { font-family: 'Playfair Display', serif; font-size: clamp(28px,4vw,44px); color: #fff; line-height: 1.15; margin-bottom: 10px; position: relative; }
+  header p { color: rgba(255,255,255,0.45); font-size: 12px; letter-spacing: 0.15em; text-transform: uppercase; position: relative; }
+  .container { max-width: 860px; margin: 0 auto; padding: 0 20px 60px; }
+  .price-block { background: var(--dark); border-radius: 16px; margin-top: -28px; position: relative; z-index: 10; overflow: hidden; box-shadow: 0 20px 60px rgba(26,26,46,0.35); }
+  .price-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .price-inner { display: grid; grid-template-columns: 1fr 1px 1fr; align-items: center; }
+  .price-col { padding: 32px 36px; text-align: center; }
+  .price-divider { background: rgba(255,255,255,0.08); height: 80%; align-self: center; }
+  .price-label { font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); font-weight: 600; margin-bottom: 8px; }
+  .price-value { font-family: 'Playfair Display', serif; font-size: clamp(26px,4vw,36px); color: #fff; line-height: 1; margin-bottom: 4px; }
+  .price-period { font-size: 11px; color: rgba(255,255,255,0.35); font-weight: 300; }
+  .price-footer { border-top: 1px solid rgba(255,255,255,0.06); padding: 14px 36px; text-align: center; font-size: 11px; color: rgba(201,168,76,0.7); font-style: italic; letter-spacing: 0.05em; }
+  .note { margin-top: 18px; padding: 14px 18px; background: rgba(201,168,76,0.06); border-left: 2px solid var(--gold); border-radius: 0 8px 8px 0; font-size: 12.5px; color: #666; line-height: 1.7; }
+  .section { margin-top: 44px; }
+  .section-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+  .section-line { flex: 1; height: 1px; background: linear-gradient(90deg, var(--dark), transparent); }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 13px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--dark); }
+  .section-dot { width: 6px; height: 6px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+  .items-group { margin-bottom: 20px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .items-group-header { background: var(--dark); padding: 10px 18px; font-size: 9.5px; letter-spacing: 0.2em; text-transform: uppercase; font-weight: 600; color: var(--gold); }
+  .items-grid { display: grid; grid-template-columns: 1fr 1fr; background: var(--light); }
+  .item { padding: 12px 18px; font-size: 13px; color: #444; line-height: 1.5; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; align-items: flex-start; gap: 8px; }
+  .item::before { content: '–'; color: var(--gold); flex-shrink: 0; margin-top: 1px; }
+  .capacity-block { display: grid; grid-template-columns: auto 1fr; background: var(--light); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .capacity-number { background: var(--dark); padding: 28px 32px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; border-right: 2px solid var(--gold); }
+  .capacity-num { font-family: 'Playfair Display', serif; font-size: 32px; color: #fff; line-height: 1; white-space: nowrap; }
+  .capacity-unit { font-size: 10px; color: var(--gold); margin-top: 6px; letter-spacing: 0.1em; text-transform: uppercase; }
+  .capacity-desc { padding: 28px; font-size: 14px; color: #555; line-height: 1.7; display: flex; align-items: center; }
+  .conditions-list { background: var(--light); border-radius: 12px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
+  .condition-row { display: grid; grid-template-columns: 140px 1fr; border-bottom: 1px solid rgba(0,0,0,0.06); }
+  .condition-row:last-child { border-bottom: none; }
+  .cond-label { padding: 14px 16px; font-size: 9px; letter-spacing: 0.15em; text-transform: uppercase; font-weight: 700; color: var(--gray); background: rgba(0,0,0,0.02); display: flex; align-items: center; border-right: 1px solid rgba(0,0,0,0.05); }
+  .cond-value { padding: 14px 20px; font-size: 13.5px; color: #333; line-height: 1.5; display: flex; align-items: center; }
+  .cta { margin-top: 44px; background: var(--dark); border-radius: 16px; padding: 40px 48px; text-align: center; position: relative; overflow: hidden; }
+  .cta::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+  .cta h3 { font-family: 'Playfair Display', serif; font-size: 22px; color: #fff; margin-bottom: 10px; }
+  .cta p { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; max-width: 480px; margin: 0 auto; }
+  footer { background: var(--dark); text-align: center; padding: 18px; font-size: 11px; color: rgba(255,255,255,0.25); letter-spacing: 0.08em; margin-top: 60px; }
+  @media (max-width: 600px) { .items-grid { grid-template-columns: 1fr; } .price-inner { grid-template-columns: 1fr; } .price-divider { display: none; } .capacity-block { grid-template-columns: 1fr; } .condition-row { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">Oportunidade de Negócio</div>
+  <h1>Arrendamento Comercial</h1>
+  <p>Identita Etiquetas &amp; Brindes Corporativos — Colatina, ES</p>
+</header>
+<div class="container">
+  <div class="price-block">
+    <div class="price-inner">
+      <div class="price-col">
+        <div class="price-label">Primeiros 4 meses</div>
+        <div class="price-value">R$ 6.000<span style="font-size:16px;font-weight:300">/mês</span></div>
+        <div class="price-period">Período de adaptação</div>
+      </div>
+      <div class="price-divider"></div>
+      <div class="price-col">
+        <div class="price-label">5º ao 24º mês</div>
+        <div class="price-value">R$ 8.000<span style="font-size:16px;font-weight:300">/mês</span></div>
+        <div class="price-period">Operação consolidada</div>
+      </div>
+    </div>
+    <div class="price-footer">Contrato formal de 2 anos &nbsp;·&nbsp; Negócio entregue em plena operação</div>
+  </div>
+  <div class="note">O arrendatário assume os custos do imóvel — aluguel, água, energia e internet — estimados em <strong>R$ 3.000/mês</strong> para um espaço de <strong>600 m²</strong>. O valor de arrendamento acima é exclusivo da operação.</div>
+
+  <!-- INCLUSO -->
+  <div class="section">
+    <div class="section-header"><div class="section-dot"></div><div class="section-title">O que está incluso</div><div class="section-line"></div></div>
+
+    <div class="items-group">
+      <div class="items-group-header">Maquinário e Equipamentos</div>
+      <div class="items-grid">
+        <div class="item">2 plotters laser (corte e gravação)</div>
+        <div class="item">2 prensas boca de jacaré</div>
+        <div class="item">2 prensas de gaveta</div>
+        <div class="item">2 máquinas de hotstamp e queima</div>
+        <div class="item">2 máquinas de frequência</div>
+        <div class="item">1 balancim com extensa coleção de moldes</div>
+        <div class="item">1 seladora e embaladora</div>
+        <div class="item">Estamparia completa</div>
+        <div class="item">Compressor Chiaperini 200L / 5HP (5 meses de uso)</div>
+      </div>
+    </div>
+
+    <div class="items-group">
+      <div class="items-group-header">Infraestrutura e Tecnologia</div>
+      <div class="items-grid">
+        <div class="item">Espaço industrial de 600 m²</div>
+        <div class="item">5 computadores em ótimo estado de conservação</div>
+        <div class="item">Sistema de gestão e faturamento</div>
+        <div class="item">Fluxo de trabalho com IA</div>
+        <div class="item">Sistema de contagem de produção de emborrachado com relatórios diários</div>
+        <div class="item">Escritório climatizado com divisória de vidro</div>
+      </div>
+    </div>
+
+    <div class="items-group">
+      <div class="items-group-header">Estoque e Insumos</div>
+      <div class="items-grid">
+        <div class="item">Rolos de PVC, couro sintético e materiais diversos</div>
+        <div class="item">Tintas Genesis e insumos prontos para produção</div>
+        <div class="item">Moldes para etiquetas e chaveiros emborrachados</div>
+      </div>
+    </div>
+
+    <div class="items-group">
+      <div class="items-group-header">Comercial e Carteira de Clientes</div>
+      <div class="items-grid">
+        <div class="item">Carteira de clientes ativa com pedidos recorrentes</div>
+        <div class="item">Representantes comerciais ativos em campo</div>
+        <div class="item">Arquivos digitais de artes e projetos</div>
+        <div class="item">Equipe experiente disponível para transição</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAPACIDADE -->
+  <div class="section">
+    <div class="section-header"><div class="section-dot"></div><div class="section-title">Capacidade Produtiva</div><div class="section-line"></div></div>
+    <div class="capacity-block">
+      <div class="capacity-number">
+        <div class="capacity-num">200–250mil</div>
+        <div class="capacity-unit">etiquetas / mês</div>
+      </div>
+      <div class="capacity-desc">Etiquetas para vestuário, brindes corporativos e chaveiros emborrachados. Volume ampliável com aumento de equipe.</div>
+    </div>
+  </div>
+
+  <!-- CONDIÇÕES -->
+  <div class="section">
+    <div class="section-header"><div class="section-dot"></div><div class="section-title">Condições do Contrato</div><div class="section-line"></div></div>
+    <div class="conditions-list">
+      <div class="condition-row"><div class="cond-label">Prazo</div><div class="cond-value">Contrato formal de arrendamento por 24 meses</div></div>
+      <div class="condition-row"><div class="cond-label">Valor inicial</div><div class="cond-value">R$ 6.000/mês pelos primeiros 4 meses</div></div>
+      <div class="condition-row"><div class="cond-label">Valor subsequente</div><div class="cond-value">R$ 8.000/mês do 5º ao 24º mês</div></div>
+      <div class="condition-row"><div class="cond-label">Custos do imóvel</div><div class="cond-value">Por conta do arrendatário — aluguel, água, energia e internet (aprox. R$ 3.000/mês)</div></div>
+      <div class="condition-row"><div class="cond-label">Transferência</div><div class="cond-value">Carteira de clientes, arquivos e sistemas entregues formalmente ao arrendatário</div></div>
+      <div class="condition-row"><div class="cond-label">Equipe</div><div class="cond-value">Profissionais experientes disponíveis para transição e continuidade</div></div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h3>Solicite sua visita</h3>
+    <p>Apresentação presencial da estrutura completa, sistemas em operação e carteira de clientes. Agendamento mediante contato direto.</p>
+  </div>
+</div>
+<footer>Identita Etiquetas &amp; Brindes Corporativos &nbsp;·&nbsp; Colatina, Espírito Santo &nbsp;·&nbsp; Documento confidencial</footer>
+</body>
+</html>
